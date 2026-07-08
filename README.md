@@ -156,12 +156,6 @@ For a run-through of the design and testing approach, see
 [`ARCHITECTURE.md`](ARCHITECTURE.md), and
 [`TESTING_GUIDE.md`](TESTING_GUIDE.md).
 
-## Screenshots
-
-| Kiosk UI | Live detection |
-|----------|----------------|
-| ![POS UI](pos.png) | ![Detection](detection.png) |
-
 ## License
 
 Released under the [MIT License](LICENSE).
