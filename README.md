@@ -7,8 +7,6 @@ server drives a full-screen browser kiosk that shows the live feed and an
 auto-updating cart. The model can be exported to TensorRT for low-latency
 inference on the Orin GPU.
 
-![System overview](systempos.jpg)
-
 ## Highlights
 
 - **Real-time object detection** — YOLOv8 (Ultralytics) over an MJPEG camera
