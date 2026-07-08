@@ -1,0 +1,83 @@
+╔════════════════════════════════════════════════════════════════╗
+║         AMB STORE POS - JETSON ORIN QUICK START               ║
+╚════════════════════════════════════════════════════════════════╝
+
+STEP 1: TRANSFER TO JETSON
+──────────────────────────────────────────────────────────────────
+Copy the entire "me7" folder to your Jetson Orin
+Location on Jetson: /home/jetson/me7
+
+
+STEP 2: INSTALL DEPENDENCIES (First Time Only)
+──────────────────────────────────────────────────────────────────
+ssh jetson@YOUR_JETSON_IP
+cd ~/me7
+pip3 install -r requirements.txt
+
+
+STEP 3: RUN THE SERVER
+──────────────────────────────────────────────────────────────────
+cd ~/me7
+python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+OR use the script:
+./scripts/start_server.sh
+
+
+STEP 4: OPEN IN BROWSER
+──────────────────────────────────────────────────────────────────
+On any device on the same network:
+http://YOUR_JETSON_IP:8000
+
+Example: http://192.168.1.100:8000
+
+
+THAT'S IT! 🎉
+──────────────────────────────────────────────────────────────────
+You should see the AMB Store interface with:
+✓ Blue/Orange SM Store branding
+✓ Live camera feed
+✓ Automatic object detection
+✓ Shopping cart on the left
+✓ Beautiful animations
+
+
+STOP THE SERVER
+──────────────────────────────────────────────────────────────────
+Press: Ctrl + C
+
+
+TROUBLESHOOTING
+──────────────────────────────────────────────────────────────────
+Camera not working?
+  ls /dev/video*
+  (Should show /dev/video0)
+
+Port already in use?
+  python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8080
+
+Can't access from browser?
+  Make sure firewall allows port 8000
+  Try from Jetson itself: http://localhost:8000
+
+
+FILE STRUCTURE
+──────────────────────────────────────────────────────────────────
+me7/
+├── app/              ← Backend code
+│   ├── main.py       ← FastAPI server
+│   ├── camera.py     ← Camera & YOLO detection
+│   └── config.py     ← Configuration
+├── web/              ← Frontend (AMB Store design)
+│   ├── index.html    ← Main UI
+│   └── static/
+│       ├── styles.css ← SM Store styling
+│       └── app.js     ← JavaScript
+├── best.pt           ← YOLO model
+└── requirements.txt  ← Python packages
+
+
+NEED MORE HELP?
+──────────────────────────────────────────────────────────────────
+Read: RUN_ON_JETSON.md (detailed guide)
+Read: AMB_STORE_DESIGN_README.md (design info)

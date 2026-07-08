@@ -1,0 +1,37 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# ---- Virtual environments ----
+.venv/
+venv/
+env/
+ENV/
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# ---- Logs & runtime output ----
+logs/
+*.log
+
+# ---- Model / training artifacts ----
+*.engine
+runs/
+datasets/
+
+# ---- Archives ----
+*.zip
+
+# ---- Camera test captures ----
+direct_test_cam*.jpg
+test_frame_*.jpg

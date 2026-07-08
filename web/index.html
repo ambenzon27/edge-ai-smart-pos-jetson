@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AMB Store - Smart Shopping Experience</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Main Container -->
+    <div class="pos-container">
+
+      <!-- Left Panel - Order Receipt -->
+      <aside class="order-panel">
+        <!-- Store Header -->
+        <div class="store-header">
+          <div class="store-logo">
+            <div class="logo-icon">
+              <span class="logo-text">AMB</span>
+            </div>
+            <div class="store-info">
+              <h1 class="store-name">AMB Store</h1>
+              <p class="store-tagline">We've Got It All For You!</p>
+            </div>
+          </div>
+          <div class="header-accent"></div>
+        </div>
+
+        <!-- Order Items Section -->
+        <div class="order-items">
+          <div class="items-header">
+            <span class="header-icon">🛒</span>
+            <span>Your Cart</span>
+            <span class="item-count" id="item-count">0 items</span>
+          </div>
+          <div id="order-list" class="items-list">
+            <div class="empty-order">
+              <div class="empty-icon">🛍️</div>
+              <p>Your cart is empty</p>
+              <p class="empty-subtext">Start scanning items to add them</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Footer with Totals -->
+        <div class="order-footer">
+          <div class="order-totals">
+            <div class="total-row subtotal-row">
+              <span>Subtotal:</span>
+              <span id="subtotal">₱0.00</span>
+            </div>
+            <div class="total-row grand-total">
+              <span>Total Amount:</span>
+              <span id="grand-total">₱0.00</span>
+            </div>
+          </div>
+          <div class="order-payment">
+            <button class="payment-btn primary" id="pay-btn">
+              <span class="btn-icon">💳</span>
+              <span class="btn-text">Checkout - ₱0.00</span>
+            </button>
+          </div>
+          <div class="footer-branding">
+            <p>Powered by SM Store Technology</p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Panel - Camera & Detection -->
+      <main class="main-panel">
+        <!-- Top Navigation Bar -->
+        <nav class="top-nav">
+          <div class="nav-left">
+            <div class="nav-brand">
+              <span class="nav-logo">AMB</span>
+              <span class="nav-title">Smart POS System</span>
+            </div>
+          </div>
+          <div class="nav-right">
+            <div class="nav-status" id="nav-status">
+              <span class="status-dot"></span>
+              <span>System Active</span>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Camera Section -->
+        <div class="camera-section">
+          <img id="video-feed" src="/video-stream" alt="Live camera feed" />
+          <div id="status" class="camera-status" hidden>Connecting…</div>
+
+          <!-- Recording Indicator -->
+          <div id="recording-indicator" class="recording-indicator paused">
+            <div class="indicator-dot"></div>
+            <div class="indicator-text">PAUSED</div>
+          </div>
+
+          <!-- Detection Legend -->
+          <div class="detection-legend">
+            <div class="legend-header">
+              <div class="legend-icon">📊</div>
+              <div class="legend-title">Detection Status</div>
+            </div>
+            <div class="legend-items">
+              <div class="legend-item">
+                <div class="legend-color ready"></div>
+                <span>Ready to Add</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color cooldown"></div>
+                <span>Cooldown Period</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color inactive"></div>
+                <span>Low Confidence</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scan line removed for performance -->
+        </div>
+      </main>
+    </div>
+
+    <!-- Checkout Success Modal (hidden by default) -->
+    <div class="modal" id="checkout-modal">
+      <div class="modal-content">
+        <div class="modal-icon">✅</div>
+        <h2>Payment Successful!</h2>
+        <p class="modal-amount" id="modal-amount">₱0.00</p>
+        <p class="modal-message">Thank you for shopping at AMB Store!</p>
+        <button class="modal-btn" id="modal-close">Continue Shopping</button>
+      </div>
+    </div>
+
+    <script src="/static/app.js" type="module"></script>
+  </body>
+</html>

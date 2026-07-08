@@ -1,0 +1,126 @@
+═══════════════════════════════════════════════════════════════
+  JETSON ORIN DEPLOYMENT - QUICK REFERENCE CARD
+═══════════════════════════════════════════════════════════════
+
+📁 STEP 1: SETUP (Once)
+─────────────────────────────────────────────────────────────
+cd ~/me7_2
+python3 -m venv venv
+source venv/bin/activate
+pip install ultralytics opencv-python mediapipe fastapi uvicorn
+sudo apt-get install -y espeak
+
+📹 STEP 2: TEST CAMERA
+─────────────────────────────────────────────────────────────
+python3 test_camera_jetson.py
+→ Should show: ✅ Camera working, FPS ~30
+
+⚡ STEP 3: CONVERT TO TENSORRT (IMPORTANT!)
+─────────────────────────────────────────────────────────────
+python3 convert_to_tensorrt.py
+→ Takes 5-10 minutes
+→ Creates: model/best.engine
+→ 3-5x performance boost!
+
+📊 STEP 4: TEST PERFORMANCE
+─────────────────────────────────────────────────────────────
+python3 performance_test_jetson.py
+→ Target: FPS > 15, Inference < 50ms
+
+🚀 STEP 5: RUN SYSTEM
+─────────────────────────────────────────────────────────────
+source venv/bin/activate
+python3 start_amb_store.py
+→ Open browser: http://localhost:8000
+
+═══════════════════════════════════════════════════════════════
+  HOW TO USE THE SYSTEM
+═══════════════════════════════════════════════════════════════
+
+✋ START SESSION:
+   • Show OPEN HAND to camera
+   • Hold for 1 second
+   • Status: PAUSED → RECORDING
+   • Audio: "Nagsimula na ang session"
+
+📦 SCAN ITEMS:
+   • Show item to camera
+   • Green box = Ready to add
+   • Yellow box = Paused (start session first)
+   • Orange box = Cooldown (just added)
+   • Auto-adds to cart on left
+
+✊ END SESSION:
+   • Show CLOSED FIST to camera
+   • Hold for 1 second
+   • Status: RECORDING → PAUSED
+   • Audio: Announces total amount
+
+═══════════════════════════════════════════════════════════════
+  TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════
+
+❌ LOW FPS (< 10):
+   → ls model/best.engine (check exists)
+   → If missing: python3 convert_to_tensorrt.py
+
+❌ BLACK SCREEN:
+   → python3 test_camera_jetson.py
+   → Ctrl+C, restart: python3 start_amb_store.py
+   → Browser: Ctrl+Shift+R (hard refresh)
+
+❌ NO DETECTIONS:
+   → Check model loaded (terminal output)
+   → Start session (open hand gesture)
+   → Hold item steady in frame
+
+❌ NO AUDIO:
+   → speaker-test -t wav
+   → espeak "test"
+   → Check speaker connection
+
+❌ GESTURES NOT WORKING:
+   → Better lighting
+   → Hold gesture full 1 second
+   → Hand clearly visible
+
+═══════════════════════════════════════════════════════════════
+  PERFORMANCE TARGETS
+═══════════════════════════════════════════════════════════════
+
+✅ GOOD PERFORMANCE:
+   • FPS: 15-25
+   • Inference: 30-50ms
+   • Detection latency: < 1 second
+   • Smooth video, no lag
+
+❌ POOR PERFORMANCE:
+   • FPS: < 10
+   • Inference: > 100ms
+   • Laggy video
+   → Solution: Convert to TensorRT!
+
+═══════════════════════════════════════════════════════════════
+  KEY FILES
+═══════════════════════════════════════════════════════════════
+
+~/me7_2/
+├── app/                    # Backend code
+│   ├── config.py          # Settings (camera, thresholds)
+│   ├── camera.py          # Camera & detection
+│   └── main.py            # FastAPI server
+├── web/                    # Frontend UI
+├── best.pt                # PyTorch model (12MB)
+├── model/best.engine      # TensorRT model (after conversion)
+├── start_amb_store.py     # Start server
+└── logs/detections.log    # Error logs
+
+═══════════════════════════════════════════════════════════════
+
+📞 EMERGENCY: Restart everything
+    Ctrl+C → python3 start_amb_store.py
+
+🔙 FALLBACK: Use macOS backup
+    me7_2_macOS_working_backup/
+
+═══════════════════════════════════════════════════════════════
